@@ -1,36 +1,35 @@
-'use strict';
-
 module.exports = function (app) {
 
     const config = require('../controllers/configController');
     const service = require('../controllers/servicesController');
-    const booking = require('../controllers/bookingController');
+    const email = require('../controllers/emailController');
+    const user = require('./../controllers/userController');
+    const auth = require('./../controllers/authenticate');
 
     app.route('/config')
         .get(config.all);
 
     app.route('/config/:category')
         .get(config.category)
-        .put(config.update);
+        .put(auth, config.update);
 
     app.route('/services')
-        .post(service.create);
+        .post(auth, service.create);
 
     app.route('/services/:id')
-        .put(service.update)
-        .delete(service.delete);
+        .put(auth, service.update)
+        .delete(auth, service.delete);
 
     app.route('/services/:category')
         .get(service.category);
 
-    app.route('/booking')
-        .post(booking.create);
+    app.route('/email')
+        .post(auth, email.send);
 
-    app.route('/booking/:week')
-        .get(booking.bookings);
+    app.route('/register')
+        .post(user.register)
 
-    app.route('/booking/:week/:id')
-        .put(booking.update)
-        .delete(booking.delete);
-
+    app.route('/login')
+        .post(user.login)
+        .get(user.verify)
 };

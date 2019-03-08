@@ -12,3 +12,5 @@ exports.config = {
         description: "specialist test"
     }
 }
+
+exports.secret = "***_farah_hair_and_beauty_secret_key_***";

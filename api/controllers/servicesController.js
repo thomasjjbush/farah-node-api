@@ -28,6 +28,6 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
     model.remove({ _id: req.params.id }, function (err) {
         if (err) res.send(err);
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ status: 200 });
     });
 };
